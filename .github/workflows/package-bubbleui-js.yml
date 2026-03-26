@@ -1,0 +1,37 @@
+name: package-bubbleui-js
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/bubbleui-js/**'
+      - '.github/workflows/package-bubbleui-js.yml'
+
+jobs:
+  package-web:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: packages/bubbleui-js
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Pack bubbleui-js
+        run: npm pack
+
+      - name: Upload tgz artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bubbleui-js-tgz
+          path: packages/bubbleui-js/*.tgz
+          if-no-files-found: error

@@ -19,6 +19,14 @@ A framework-agnostic JavaScript package for BubbleUI design tokens and theme uti
 npm install /absolute/path/to/bubbleUI/packages/bubbleui-js
 ```
 
+### Install from a packaged `.tgz`
+
+If this repository is connected to GitHub Actions, download the `bubbleui-js-*.tgz` artifact from the latest `package-bubbleui-js` workflow run, then install it with:
+
+```bash
+npm install /absolute/path/to/bubbleui-js-0.1.0.tgz
+```
+
 ### Pack locally and install the tarball
 
 Inside the package folder:
@@ -106,4 +114,5 @@ export function Example() {
 
 - During local development: install directly from the package folder
 - For sharing with other local web projects: run `npm pack` and install the generated `.tgz`
+- For GitHub-based sharing without npm: use the workflow artifact from `.github/workflows/package-bubbleui-js.yml`
 - If you later publish to npm, this package structure is already close to publish-ready
