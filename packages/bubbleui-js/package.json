@@ -1,0 +1,53 @@
+{
+  "name": "bubbleui-js",
+  "version": "0.1.0",
+  "description": "BubbleUI design tokens and web theme utilities for JavaScript projects.",
+  "type": "module",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "style": "./styles/bubbleui.css",
+  "sideEffects": [
+    "./styles/bubbleui.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./tokens": {
+      "types": "./src/tokens.d.ts",
+      "default": "./src/tokens.js"
+    },
+    "./theme": {
+      "types": "./src/theme.d.ts",
+      "default": "./src/theme.js"
+    },
+    "./react": {
+      "types": "./src/react/index.d.ts",
+      "default": "./src/react/index.js"
+    },
+    "./styles.css": "./styles/bubbleui.css"
+  },
+  "files": [
+    "src",
+    "styles",
+    "README.md"
+  ],
+  "scripts": {
+    "pack:local": "npm pack"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "keywords": [
+    "bubbleui",
+    "design-tokens",
+    "theme",
+    "css-variables",
+    "ui",
+    "web",
+    "react"
+  ],
+  "license": "MIT"
+}

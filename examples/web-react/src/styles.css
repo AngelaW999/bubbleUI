@@ -1,0 +1,113 @@
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top right, rgba(124, 200, 248, 0.22), transparent 30%),
+    linear-gradient(180deg, #f9fcff 0%, #eef6fb 100%);
+  color: #173754;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.example-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px 56px;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-end;
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(31, 78, 121, 0.08);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.hero h1 {
+  margin: 12px 0 8px;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+}
+
+.hero p,
+.example-section__header p,
+.token-card span,
+.gradient-card span {
+  color: #3e4c5c;
+}
+
+.hero__actions,
+.inline-row,
+.stack-sm {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.stack-sm,
+.stack-lg {
+  flex-direction: column;
+}
+
+.stack-lg {
+  display: flex;
+  gap: 16px;
+}
+
+.example-section {
+  margin-bottom: 24px;
+}
+
+.example-section__header {
+  margin-bottom: 12px;
+}
+
+.example-section__header h2,
+.card-grid h3 {
+  margin: 0 0 8px;
+}
+
+.card-grid,
+.token-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.token-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.token-swatch {
+  height: 56px;
+  border-radius: 16px;
+  border: 1px solid rgba(23, 55, 84, 0.08);
+}
+
+.gradient-card {
+  padding: 20px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #f9fcff, #edf7ff, #e2f2ff);
+  border: 1px solid rgba(23, 55, 84, 0.08);
+}
+
+@media (max-width: 720px) {
+  .hero {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
