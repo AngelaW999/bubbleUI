@@ -1,6 +1,12 @@
 name: release-bubbleui
 
 on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag such as v0.1.0'
+        required: true
+        type: string
   push:
     tags:
       - 'v*'
@@ -8,6 +14,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.release_tag || github.ref_name }}
 
     steps:
       - name: Checkout repository
@@ -24,7 +32,7 @@ jobs:
           node-version: '20'
 
       - name: Validate tag and package versions
-        run: python scripts/release_metadata.py --tag "${GITHUB_REF_NAME}" --require-match
+        run: python scripts/release_metadata.py --tag "${RELEASE_TAG}" --require-match
 
       - name: Install Python build tooling and project dependencies
         run: python -m pip install build -e .
@@ -45,13 +53,13 @@ jobs:
       - name: Upload Python artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: bubbleui-python-${{ github.ref_name }}
+          name: bubbleui-python-${{ env.RELEASE_TAG }}
           path: dist/*
           if-no-files-found: error
 
       - name: Upload React tgz artifact
         uses: actions/upload-artifact@v4
         with:
-          name: bubbleui-js-${{ github.ref_name }}
+          name: bubbleui-js-${{ env.RELEASE_TAG }}
           path: packages/bubbleui-js/${{ steps.pack.outputs.package_file }}
           if-no-files-found: error

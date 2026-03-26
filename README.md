@@ -18,6 +18,7 @@ bubbleUI/
 й└йд scripts/release_metadata.py
 й└йд .github/workflows/package-bubbleui-js.yml
 й└йд .github/workflows/release-bubbleui.yml
+й└йд RELEASING.md
 й╕йд tests/                    Python smoke tests
 ```
 
@@ -96,20 +97,14 @@ BubbleUI now uses a simple shared release rule:
 - Git tag format: `vX.Y.Z`
 - Release rule: the git tag, Python version, and React version must all match
 
-Validate versions locally:
+Detailed release steps are documented in `RELEASING.md`.
+
+Quick validation commands:
 
 ```bash
 python scripts/release_metadata.py --require-match
 python scripts/release_metadata.py --tag v0.1.0 --require-match
 ```
-
-Release flow:
-
-1. Update `bubbleui/_version.py` and `packages/bubbleui-js/package.json` to the same version.
-2. Commit the version bump.
-3. Create and push a tag like `v0.1.0`.
-4. GitHub Actions runs `.github/workflows/release-bubbleui.yml`.
-5. The workflow uploads Python build artifacts and a versioned React `.tgz` artifact.
 
 Run the web example:
 
