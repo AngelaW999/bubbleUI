@@ -8,6 +8,7 @@ on:
     paths:
       - 'packages/bubbleui-js/**'
       - '.github/workflows/package-bubbleui-js.yml'
+      - 'scripts/release_metadata.py'
 
 jobs:
   package-web:
@@ -21,17 +22,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
+      - name: Validate package versions
+        run: python "$GITHUB_WORKSPACE/scripts/release_metadata.py" --require-match
+
       - name: Pack bubbleui-js
-        run: npm pack
+        id: pack
+        run: |
+          PACKAGE_FILE=$(npm pack)
+          echo "package_file=$PACKAGE_FILE" >> "$GITHUB_OUTPUT"
 
       - name: Upload tgz artifact
         uses: actions/upload-artifact@v4
         with:
-          name: bubbleui-js-tgz
-          path: packages/bubbleui-js/*.tgz
+          name: bubbleui-js-package
+          path: packages/bubbleui-js/${{ steps.pack.outputs.package_file }}
           if-no-files-found: error

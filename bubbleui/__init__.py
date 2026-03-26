@@ -1,4 +1,5 @@
-﻿from .components import (
+from ._version import __version__
+from .components import (
     BubbleBadge,
     BubbleButton,
     BubbleCard,
@@ -18,6 +19,7 @@ from .design_token import (
 from .preview import build_theme_preview
 
 __all__ = [
+    "__version__",
     "BUBBLE_COLORS",
     "BUBBLE_GRADIENT",
     "BUBBLE_RADIUS",

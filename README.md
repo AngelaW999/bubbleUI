@@ -15,6 +15,9 @@ bubbleUI/
 й└йд packages/bubbleui-js/     Web and React package
 й└йд examples/python-exe/      Python showcase for all current Flet components
 й└йд examples/web-react/       React showcase for the current web components
+й└йд scripts/release_metadata.py
+й└йд .github/workflows/package-bubbleui-js.yml
+й└йд .github/workflows/release-bubbleui.yml
 й╕йд tests/                    Python smoke tests
 ```
 
@@ -82,6 +85,31 @@ GitHub Actions package artifact:
 - Workflow file: `.github/workflows/package-bubbleui-js.yml`
 - Trigger: manual run or push to `main` when `packages/bubbleui-js/**` changes
 - Output: downloadable `bubbleui-js-*.tgz` artifact in the workflow run
+
+## Versioning and release
+
+BubbleUI now uses a simple shared release rule:
+
+- Python version source: `bubbleui/_version.py`
+- Python package metadata reads that version dynamically in `pyproject.toml`
+- React version source: `packages/bubbleui-js/package.json`
+- Git tag format: `vX.Y.Z`
+- Release rule: the git tag, Python version, and React version must all match
+
+Validate versions locally:
+
+```bash
+python scripts/release_metadata.py --require-match
+python scripts/release_metadata.py --tag v0.1.0 --require-match
+```
+
+Release flow:
+
+1. Update `bubbleui/_version.py` and `packages/bubbleui-js/package.json` to the same version.
+2. Commit the version bump.
+3. Create and push a tag like `v0.1.0`.
+4. GitHub Actions runs `.github/workflows/release-bubbleui.yml`.
+5. The workflow uploads Python build artifacts and a versioned React `.tgz` artifact.
 
 Run the web example:
 

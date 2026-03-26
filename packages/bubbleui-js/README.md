@@ -21,7 +21,7 @@ npm install /absolute/path/to/bubbleUI/packages/bubbleui-js
 
 ### Install from a packaged `.tgz`
 
-If this repository is connected to GitHub Actions, download the `bubbleui-js-*.tgz` artifact from the latest `package-bubbleui-js` workflow run, then install it with:
+If this repository is connected to GitHub Actions, download the `bubbleui-js-*.tgz` artifact from the latest workflow run, then install it with:
 
 ```bash
 npm install /absolute/path/to/bubbleui-js-0.1.0.tgz
@@ -40,6 +40,19 @@ Then another project can install it with:
 
 ```bash
 npm install /absolute/path/to/bubbleui-js-0.1.0.tgz
+```
+
+## Versioning
+
+- Package version source: `package.json`
+- Expected release tag: `vX.Y.Z`
+- Generated tarball name: `bubbleui-js-X.Y.Z.tgz`
+- Shared release rule: the tag must match both `package.json` and `bubbleui/_version.py`
+
+Validate before a release from the repository root:
+
+```bash
+python scripts/release_metadata.py --tag v0.1.0 --require-match
 ```
 
 ## Use tokens
@@ -114,5 +127,5 @@ export function Example() {
 
 - During local development: install directly from the package folder
 - For sharing with other local web projects: run `npm pack` and install the generated `.tgz`
-- For GitHub-based sharing without npm: use the workflow artifact from `.github/workflows/package-bubbleui-js.yml`
+- For GitHub-based sharing without npm: use the workflow artifact from `.github/workflows/package-bubbleui-js.yml` or the tag release flow from `.github/workflows/release-bubbleui.yml`
 - If you later publish to npm, this package structure is already close to publish-ready
